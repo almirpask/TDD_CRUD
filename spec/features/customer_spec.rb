@@ -33,4 +33,11 @@ feature "Customer", type: :feature do
     expect(page).to have_content('Customer Created Successfully')
     expect(Customer.last.name).to eq(customer_name)
   end
+
+  scenario 'Create a new Customer with out fill the form' do
+    visit(new_customer_path)
+    click_on('Create Customer')
+
+    expect(page).to have_content("can't be blank")
+  end
 end
