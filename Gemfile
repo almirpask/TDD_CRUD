@@ -44,6 +44,7 @@ group :development, :test do
   gem 'faker'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'factory_bot_rails'
 end
 
 group :development do

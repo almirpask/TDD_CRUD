@@ -54,13 +54,7 @@ feature "Customer", type: :feature do
   end
 
   scenario 'Click on Customer show link' do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      smoker: ['Y', 'N'].sample,
-      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
-    )
+    customer = create(:customer)
 
     visit(customers_path)
 
@@ -91,13 +85,7 @@ feature "Customer", type: :feature do
   end
   
   scenario 'Update a Customer' do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      smoker: ['Y', 'N'].sample,
-      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
-    )
+    customer = create(:customer)
 
     visit(edit_customer_path(customer.id))
 
@@ -112,13 +100,7 @@ feature "Customer", type: :feature do
   end
 
   scenario 'Click on Customer edit link' do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      smoker: ['Y', 'N'].sample,
-      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
-    )
+    customer = create(:customer)
 
     visit(customers_path)
 
@@ -128,13 +110,7 @@ feature "Customer", type: :feature do
   end
 
   scenario 'Destroy a Customer', js: true do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      smoker: ['Y', 'N'].sample,
-      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
-    )
+    customer = create(:customer)
 
     visit(customers_path)
 
