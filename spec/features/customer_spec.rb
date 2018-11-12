@@ -126,5 +126,23 @@ feature "Customer", type: :feature do
 
     expect(page).to have_content('Edit Customer')
   end
+
+  scenario 'Destroy a Customer', js: true do
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['Y', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
+    )
+
+    visit(customers_path)
+
+    find(:xpath, '/html/body/table/tbody/tr[1]/td[5]/a').click
+
+    page.driver.browser.switch_to.alert.accept
+
+    expect(page).to have_content('Customer Deleted Successfully')
+  end
   
 end

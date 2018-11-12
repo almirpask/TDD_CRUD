@@ -32,6 +32,12 @@ class CustomersController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    if @customer.destroy
+      redirect_to customers_path, notice: 'Customer Deleted Successfully'
+    end
+  end
   
   private
 
