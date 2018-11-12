@@ -3,3 +3,28 @@
 <% end %>
 <h1>Customers List</h1>
 <%= link_to  'New Customer', new_customer_path %>
+
+<br/>
+
+<table id="custumers-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.id %></td>
+      <td><%= customer.name %></td>
+      <td><%= link_to 'Show', customer_path(customer.id) %></td>
+      <td><%= link_to 'Edit', edit_customer_path(customer.id) %></td>
+      <td><%= link_to 'Destroy', customer_path(customer.id) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -49,9 +49,24 @@ feature "Customer", type: :feature do
       smoker: ['Y', 'N'].sample,
       avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
     )
-
     visit(customer_path(customer.id))
     expect(page).to have_content(customer.name)
+  end
+
+  scenario 'Click on Customer show link' do
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['Y', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
+    )
+
+    visit(customers_path)
+
+    find(:xpath, '/html/body/table/tbody/tr[1]/td[3]/a').click
+
+    expect(page).to have_content('Showing User')
   end
 
   scenario 'Check Customers index' do
@@ -74,4 +89,42 @@ feature "Customer", type: :feature do
     visit(customers_path)
     expect(page).to have_content(customer1.name).and have_content(customer2.name)
   end
+  
+  scenario 'Update a Customer' do
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['Y', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
+    )
+
+    visit(edit_customer_path(customer.id))
+
+    new_name = Faker::Name.name
+
+    fill_in('Name', with: new_name)
+    
+    click_on('Create Customer')
+    
+    expect(page).to have_content('Customer Successfully Updated')
+    expect(page).to have_content(new_name)
+  end
+
+  scenario 'Click on Customer edit link' do
+    customer = Customer.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      smoker: ['Y', 'N'].sample,
+      avatar: "#{Rails.root}/spec/fixtures/images/avatar.png"
+    )
+
+    visit(customers_path)
+
+    find(:xpath, '/html/body/table/tbody/tr[1]/td[4]/a').click
+
+    expect(page).to have_content('Edit Customer')
+  end
+  
 end
